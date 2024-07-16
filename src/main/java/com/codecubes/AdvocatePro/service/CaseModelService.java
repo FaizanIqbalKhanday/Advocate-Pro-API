@@ -1,32 +1,21 @@
 package com.codecubes.AdvocatePro.service;
 
 import com.codecubes.AdvocatePro.model.CaseDetails;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
+import com.codecubes.AdvocatePro.repository.CaseModelRepository;
 import org.springframework.stereotype.Service;
-
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
 @Service
 public class CaseModelService {
-    private static final String COLLECTION_NAME = "caseModel";
+    private final CaseModelRepository caseModelRepository;
 
-    public String saveProduct(CaseDetails caseDetails) throws ExecutionException, InterruptedException {
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference(COLLECTION_NAME);
+    public CaseModelService(CaseModelRepository caseModelRepository) {
+        this.caseModelRepository = caseModelRepository;
+    }
+    public String addCaseDetails(CaseDetails caseDetails){
+        caseModelRepository.save(caseDetails);
+        return "success";
+    }
+    public CaseDetails getCaseDetails(String ncrNumber) {
 
-        // Use CompletableFuture to handle async operations
-        CompletableFuture<String> future = new CompletableFuture<>();
-
-        // Add the product to the database
-        databaseReference.push().setValue(caseDetails, (databaseError, databaseReference1) -> {
-            if (databaseError != null) {
-                future.completeExceptionally(databaseError.toException());
-            } else {
-                future.complete("Case details saved successfully");
-            }
-        });
-
-        // Wait for the async operation to complete
-        return future.get();
+        return caseModelRepository.findByNcrNumber(ncrNumber).get(0);
     }
 }
