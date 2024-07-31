@@ -3,34 +3,55 @@ package com.codecubes.AdvocatePro.model;
 import jakarta.persistence.*;
 
 import java.util.List;
-import java.util.Objects;
 
 @Entity
 @Table(name = "advocate_details")
 public class AdvocateDetails {
-    @Id
-    private String advocateId;
+
+    private String advocateEmail;
     @Column(name = "advocate_name")
     private String AdvocateName;
+    @Id
+    private String advocatePhoneNumber;
+    private String password;
     @ElementCollection
     private List<Cases> casesList;
 
     public AdvocateDetails() {
     }
 
-    public AdvocateDetails(String advocateId, String advocateName, List<Cases> casesList) {
-        this.advocateId = advocateId;
+    public String getAdvocateEmail() {
+        return advocateEmail;
+    }
+
+    public AdvocateDetails(String advocateEmail, String advocateName, String advocatePhoneNumber, String password, List<Cases> casesList) {
+        this.advocateEmail = advocateEmail;
         AdvocateName = advocateName;
+        this.advocatePhoneNumber = advocatePhoneNumber;
+        this.password = password;
         this.casesList = casesList;
     }
 
-    public String getAdvocateId() {
-        return advocateId;
+    public void setAdvocateEmail(String advocateEmail) {
+        this.advocateEmail = advocateEmail;
     }
 
-    public void setAdvocateId(String advocateId) {
-        this.advocateId = advocateId;
+    public String getAdvocatePhoneNumber() {
+        return advocatePhoneNumber;
     }
+
+    public void setAdvocatePhoneNumber(String advocatePhoneNumber) {
+        this.advocatePhoneNumber = advocatePhoneNumber;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
 
     public String getAdvocateName() {
         return AdvocateName;
@@ -101,4 +122,45 @@ private String courtNumberAndJudge;
     public void setCourtNumberAndJudge(String courtNumberAndJudge) {
         this.courtNumberAndJudge = courtNumberAndJudge;
     }
+}
+@Embeddable
+class FeeAmount {
+    private int totalFees;
+    private int paidFees;
+    private int balanceFees;
+
+
+    public FeeAmount() {
+    }
+
+    public FeeAmount(int totalFees, int paidFees) {
+        this.totalFees = totalFees;
+        this.paidFees = paidFees;
+
+    }
+
+    public int getTotalFees() {
+        return totalFees;
+    }
+
+    public void setTotalFees(int totalFees) {
+        this.totalFees = totalFees;
+    }
+
+    public int getPaidFees() {
+        return paidFees;
+    }
+
+    public void setPaidFees(int paidFees) {
+        this.paidFees = paidFees;
+    }
+
+    public int getBalanceFees() {
+        return balanceFees;
+    }
+
+    public void setBalanceFees(int balanceFees) {
+        this.balanceFees = totalFees-paidFees;
+    }
+
 }

@@ -24,29 +24,29 @@ public class CaseModelService {
         caseModelRepository.save(caseDetails);
 
     }
-    public AdvocateDetails getCaseDetails(String advocateId) {
-        AdvocateDetails advocateDetails=caseModelRepository.findByAdvocateId(advocateId).get(0);
+    public AdvocateDetails getCaseDetails(String advocatePhoneNumber) {
+        AdvocateDetails advocateDetails=caseModelRepository.findByAdvocatePhoneNumber(advocatePhoneNumber).get(0);
         if (advocateDetails==null){
-            throw new ResourceNotFoundException("Advocate with ID " + advocateId + " not found");
+            throw new ResourceNotFoundException("Advocate with ID " + advocatePhoneNumber + " not found");
         }
         return advocateDetails;
     }
     public void updateCloudVendor(AdvocateDetails advocateDetails) {
         caseModelRepository.save(advocateDetails);
     }
-    public String getAdvocateNameById(String advocateId) {
-        return caseModelRepository.findAdvocateNameById(advocateId);
+    public String getAdvocateNameById(String advocateEmail) {
+        return caseModelRepository.findAdvocateNameById(advocateEmail);
     }
-    public void deleteAdvocateById(String advocateId) {
-        if (caseModelRepository.existsById(advocateId)) {
-            caseModelRepository.deleteById(advocateId);
+    public void deleteAdvocateById(String advocatePhoneNumber) {
+        if (caseModelRepository.existsById(advocatePhoneNumber)) {
+            caseModelRepository.deleteById(advocatePhoneNumber);
         } else {
             throw new RuntimeException("Advocate not found");
         }
     }
     @Transactional
-    public void deleteCaseByNcrNumber(String advocateId, String ncrNumber) {
-        AdvocateDetails advocateDetails = caseModelRepository.findById(advocateId).orElseThrow(() -> new RuntimeException("Advocate not found"));
+    public void deleteCaseByNcrNumber(String advocatePhoneNumber, String ncrNumber) {
+        AdvocateDetails advocateDetails = caseModelRepository.findById(advocatePhoneNumber).orElseThrow(() -> new RuntimeException("Advocate not found"));
 
         Iterator<Cases> iterator = advocateDetails.getCasesList().iterator();
         while (iterator.hasNext()) {

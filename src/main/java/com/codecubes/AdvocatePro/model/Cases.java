@@ -10,13 +10,24 @@ class Cases {
     private CaseDetails caseDetails;
     @Embedded
     private CaseStatus caseStatus;
+    @Embedded
+    private FeeAmount feeAmount;
 
     public Cases() {
     }
 
-    public Cases(CaseDetails caseDetails, CaseStatus caseStatus) {
+    public Cases(CaseDetails caseDetails, CaseStatus caseStatus, FeeAmount feeAmount) {
         this.caseDetails = caseDetails;
         this.caseStatus = caseStatus;
+        this.feeAmount=feeAmount;
+    }
+
+    public FeeAmount getFeeAmount() {
+        return feeAmount;
+    }
+
+    public void setFeeAmount(FeeAmount feeAmount) {
+        this.feeAmount = feeAmount;
     }
 
     public CaseDetails getCaseDetails() {

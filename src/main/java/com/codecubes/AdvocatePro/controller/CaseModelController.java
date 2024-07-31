@@ -28,9 +28,9 @@ public class CaseModelController {
         caseModelService.addCaseDetails(caseDetails);
         return "case details added successfully";
     }
-    @GetMapping("/{advocateId}")
-    public AdvocateDetails getCaseDetails(@PathVariable("advocateId") String advocateId){
-        AdvocateDetails advocateDetails=caseModelService.getCaseDetails(advocateId);
+    @GetMapping("/{advocatePhoneNumber}")
+    public AdvocateDetails getCaseDetails(@PathVariable("advocatePhoneNumber") String advocatePhoneNumber){
+        AdvocateDetails advocateDetails=caseModelService.getCaseDetails(advocatePhoneNumber);
         return new ResponseEntity<>(advocateDetails, HttpStatus.OK).getBody();
     }
     @PutMapping
@@ -41,22 +41,22 @@ public class CaseModelController {
     }
 
 
-    @GetMapping("/{advocateId}/name")
-    public String getAdvocateName(@PathVariable("advocateId") String advocateId){
-        return caseModelService.getAdvocateNameById(advocateId);
+    @GetMapping("/{advocateEmail}/name")
+    public String getAdvocateName(@PathVariable("advocateEmail") String advocateEmail){
+        return caseModelService.getAdvocateNameById(advocateEmail);
     }
     @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity<String> handleResourceNotFoundException(ResourceNotFoundException ex) {
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
     }
-    @DeleteMapping("/{advocateId}")
-    public ResponseEntity<String> deleteAdvocateDetailsById(@PathVariable("advocateId")String advocateId) throws GlobalExceptionHandler {
-        caseModelService.deleteAdvocateById(advocateId);
+    @DeleteMapping("/{advocatePhoneNumber}")
+    public ResponseEntity<String> deleteAdvocateDetailsById(@PathVariable("advocatePhoneNumber")String advocatePhoneNumber) throws GlobalExceptionHandler {
+        caseModelService.deleteAdvocateById(advocatePhoneNumber);
         return ResponseEntity.ok().build();
     }
-    @DeleteMapping("/{advocateId}/cases/{ncrNumber}")
-    public ResponseEntity<?> deleteCase(@PathVariable String advocateId, @PathVariable String ncrNumber) {
-        caseModelService.deleteCaseByNcrNumber(advocateId, ncrNumber);
+    @DeleteMapping("/{advocatePhoneNumber}/cases/{ncrNumber}")
+    public ResponseEntity<?> deleteCase(@PathVariable String advocatePhoneNumber, @PathVariable String ncrNumber) {
+        caseModelService.deleteCaseByNcrNumber(advocatePhoneNumber, ncrNumber);
         return ResponseEntity.ok().build();
     }
 

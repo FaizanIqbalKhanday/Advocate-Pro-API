@@ -9,10 +9,10 @@ import java.util.List;
 
 @Repository
 public interface CaseModelRepository extends JpaRepository<AdvocateDetails,String> {
-    List<AdvocateDetails> findByAdvocateId(String advocateId);
-    @Query("SELECT a.AdvocateName FROM AdvocateDetails a WHERE a.advocateId = :advocateId")
-    String findAdvocateNameById(String advocateId);
-   void deleteByAdvocateId(String advocateId);
+    List<AdvocateDetails> findByAdvocatePhoneNumber(String advocatePhoneNumber);
+    @Query("SELECT a.AdvocateName FROM AdvocateDetails a WHERE a.advocateEmail = :advocateEmail")
+    String findAdvocateNameById(String advocateEmail);
+   void deleteByAdvocatePhoneNumber(String advocatePhoneNumber);
 
 
 }
