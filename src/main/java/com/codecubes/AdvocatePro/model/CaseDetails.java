@@ -16,19 +16,13 @@ class CaseDetails {
     private String registrationDate;
 
     private String ncrNumber;
+    private String act;
+    private String Section;
 
     public CaseDetails() {
     }
 
-    public CaseDetails(String caseType, String filingNumber, String filingDate,
-                       String registrationNumber, String registrationDate, String ncrNumber) {
-        this.caseType = caseType;
-        this.filingNumber = filingNumber;
-        this.filingDate = filingDate;
-        this.registrationNumber = registrationNumber;
-        this.registrationDate = registrationDate;
-        this.ncrNumber = ncrNumber;
-    }
+
 
     public String getCaseType() {
         return caseType;
@@ -40,6 +34,35 @@ class CaseDetails {
 
     public String getFilingNumber() {
         return filingNumber;
+    }
+
+    public CaseDetails(String caseType, String filingNumber,
+                       String filingDate, String registrationNumber, String registrationDate, String ncrNumber,
+                       String act, String section) {
+        this.caseType = caseType;
+        this.filingNumber = filingNumber;
+        this.filingDate = filingDate;
+        this.registrationNumber = registrationNumber;
+        this.registrationDate = registrationDate;
+        this.ncrNumber = ncrNumber;
+        this.act = act;
+        Section = section;
+    }
+
+    public String getAct() {
+        return act;
+    }
+
+    public void setAct(String act) {
+        this.act = act;
+    }
+
+    public String getSection() {
+        return Section;
+    }
+
+    public void setSection(String section) {
+        Section = section;
     }
 
     public void setFilingNumber(String filingNumber) {

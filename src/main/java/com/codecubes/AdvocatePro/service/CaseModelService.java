@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Iterator;
+import java.util.Optional;
 
 @Service
 public class CaseModelService {
@@ -30,6 +31,30 @@ public class CaseModelService {
             throw new ResourceNotFoundException("Advocate with ID " + advocatePhoneNumber + " not found");
         }
         return advocateDetails;
+    }
+    public Optional<Cases> getCaseByNcrNumber(String ncrNumber) {
+        return caseModelRepository.findAll().stream()
+                .flatMap(advocateDetails -> advocateDetails.getCasesList().stream())
+                .filter(caseDetails -> caseDetails.getCaseDetails().getNcrNumber().equals(ncrNumber))
+                .findFirst();
+    }
+    public Optional<Cases> getCaseByFirNumber(int firNumber) {
+        return caseModelRepository.findAll().stream()
+                .flatMap(advocateDetails -> advocateDetails.getCasesList().stream())
+                .filter(firDetails -> firDetails.getFirDetails().getFirNumber()==firNumber)
+                .findFirst();
+    }
+    public Optional<Cases> getCaseByRegistrationNumber(String registrationNumber) {
+        return caseModelRepository.findAll().stream()
+                .flatMap(advocateDetails -> advocateDetails.getCasesList().stream())
+                .filter(caseDetails -> caseDetails.getCaseDetails().getRegistrationNumber().equals(registrationNumber))
+                .findFirst();
+    }
+    public Optional<Cases> getCaseByFilingNumber(String filingNumber) {
+        return caseModelRepository.findAll().stream()
+                .flatMap(advocateDetails -> advocateDetails.getCasesList().stream())
+                .filter(caseDetails -> caseDetails.getCaseDetails().getFilingNumber().equals(filingNumber))
+                .findFirst();
     }
     public void updateCloudVendor(AdvocateDetails advocateDetails) {
         caseModelRepository.save(advocateDetails);

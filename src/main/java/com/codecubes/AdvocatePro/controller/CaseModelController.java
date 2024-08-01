@@ -2,6 +2,7 @@ package com.codecubes.AdvocatePro.controller;
 
 import com.codecubes.AdvocatePro.exception.GlobalExceptionHandler;
 import com.codecubes.AdvocatePro.model.AdvocateDetails;
+import com.codecubes.AdvocatePro.model.Cases;
 import com.codecubes.AdvocatePro.service.CaseModelService;
 import org.apache.catalina.connector.Response;
 import org.apache.velocity.exception.ResourceNotFoundException;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/advocatepro")
@@ -44,6 +46,26 @@ public class CaseModelController {
     @GetMapping("/{advocateEmail}/name")
     public String getAdvocateName(@PathVariable("advocateEmail") String advocateEmail){
         return caseModelService.getAdvocateNameById(advocateEmail);
+    }
+    @GetMapping("/{ncrNumber}/ncr")
+    public ResponseEntity<Cases> getCaseByNcrNumber(@PathVariable String ncrNumber) {
+        Optional<Cases> caseDetails = caseModelService.getCaseByNcrNumber(ncrNumber);
+        return caseDetails.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    }
+    @GetMapping("/{firNumber}/fir")
+    public ResponseEntity<Cases> getCaseByFirNumber(@PathVariable int firNumber) {
+        Optional<Cases> caseDetails = caseModelService.getCaseByFirNumber(firNumber);
+        return caseDetails.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    }
+    @GetMapping("/{registrationNumber}/reg")
+    public ResponseEntity<Cases> getCaseByRegistrationNumber(@PathVariable String registrationNumber) {
+        Optional<Cases> caseDetails = caseModelService.getCaseByRegistrationNumber(registrationNumber);
+        return caseDetails.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    }
+    @GetMapping("/{filingNumber}/fil")
+    public ResponseEntity<Cases> getCaseByFilingNumber(@PathVariable String filingNumber) {
+        Optional<Cases> caseDetails = caseModelService.getCaseByFilingNumber(filingNumber);
+        return caseDetails.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
     @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity<String> handleResourceNotFoundException(ResourceNotFoundException ex) {

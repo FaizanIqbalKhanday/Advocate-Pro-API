@@ -11,24 +11,36 @@ class Cases {
     @Embedded
     private CaseStatus caseStatus;
     @Embedded
-    private FeeAmount feeAmount;
+    private ClientDetails clientDetails;
+    private FIRDetails firDetails;
 
     public Cases() {
     }
 
-    public Cases(CaseDetails caseDetails, CaseStatus caseStatus, FeeAmount feeAmount) {
+    public Cases(CaseDetails caseDetails, CaseStatus caseStatus,
+                 ClientDetails clientDetails, FIRDetails firDetails) {
         this.caseDetails = caseDetails;
         this.caseStatus = caseStatus;
-        this.feeAmount=feeAmount;
+        this.clientDetails = clientDetails;
+        this.firDetails = firDetails;
     }
 
-    public FeeAmount getFeeAmount() {
-        return feeAmount;
+    public ClientDetails getClientDetails() {
+        return clientDetails;
     }
 
-    public void setFeeAmount(FeeAmount feeAmount) {
-        this.feeAmount = feeAmount;
+    public void setClientDetails(ClientDetails clientDetails) {
+        this.clientDetails = clientDetails;
     }
+
+    public FIRDetails getFirDetails() {
+        return firDetails;
+    }
+
+    public void setFirDetails(FIRDetails firDetails) {
+        this.firDetails = firDetails;
+    }
+
 
     public CaseDetails getCaseDetails() {
         return caseDetails;

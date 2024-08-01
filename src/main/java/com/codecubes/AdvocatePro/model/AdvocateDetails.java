@@ -124,19 +124,38 @@ private String courtNumberAndJudge;
     }
 }
 @Embeddable
-class FeeAmount {
+class ClientDetails {
+    private String clientName;
+    private String ClientPhoneNumber;
     private int totalFees;
     private int paidFees;
     private int balanceFees;
 
 
-    public FeeAmount() {
+    public ClientDetails() {
     }
 
-    public FeeAmount(int totalFees, int paidFees) {
+    public ClientDetails(String clientName, String clientPhoneNumber, int totalFees, int paidFees) {
+        this.clientName = clientName;
+        ClientPhoneNumber = clientPhoneNumber;
         this.totalFees = totalFees;
         this.paidFees = paidFees;
+    }
 
+    public String getClientName() {
+        return clientName;
+    }
+
+    public void setClientName(String clientName) {
+        this.clientName = clientName;
+    }
+
+    public String getClientPhoneNumber() {
+        return ClientPhoneNumber;
+    }
+
+    public void setClientPhoneNumber(String clientPhoneNumber) {
+        ClientPhoneNumber = clientPhoneNumber;
     }
 
     public int getTotalFees() {
